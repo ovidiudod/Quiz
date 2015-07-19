@@ -10,6 +10,8 @@ router.get('/', function(req, res) {
 
 router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer',   quizController.answer);
+router.get('/quizes/author',   quizController.author);
+
 
 
 module.exports = router;
