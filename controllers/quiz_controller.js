@@ -122,6 +122,6 @@ exports.destroy = function(req, res) {
 //  console.log("req.quiz.id: " + req.quiz.id);
 exports.author = function(req, res) {
        console.log("author");
-      res.render({'quizes/author', errors: []});
+      res.render('quizes/author', {errors: []});
   
 };
