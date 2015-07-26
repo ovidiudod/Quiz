@@ -19,7 +19,7 @@ if(req.query.search) {
 			where: ["pregunta like ?", "%" + req.query.search + "%"]
 		}).then (
 			function(quizes) {
-				res.render('quizes/index.ejs', {quizes: quizes});
+				res.render('quizes/index.ejs', {quizes: quizes,errors: []});
 			}
 		).catch(function(error) { next(error);})
 	} else {
