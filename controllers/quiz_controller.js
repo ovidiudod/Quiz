@@ -61,8 +61,7 @@ exports.new = function(req, res) {
 
 // POST /quizes/create
 exports.create = function(req, res) {
-  req.body.quiz.UserId = req.session.user.id;
- 
+
   var quiz = models.Quiz.build( req.body.quiz );
 
   quiz
