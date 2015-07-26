@@ -19,10 +19,10 @@ router.param('quizId', quizController.load);  // autoload :quizId
 router.get('/quizes',                      quizController.index);
 router.get('/quizes/:quizId(\\d+)',        quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
-router.get('/quizes/new', 				   sessionController.loginRequired, quizController.new);
-router.post('/quizes/create',              sessionController.loginRequired, multer({ dest: './public/media/'}), quizController.create);
-router.get('/quizes/:quizId(\\d+)/edit',   sessionController.loginRequired, quizController.ownershipRequired, quizController.edit);
-router.put('/quizes/:quizId(\\d+)',        sessionController.loginRequired, quizController.ownershipRequired, multer({ dest: './public/media/'}), quizController.update);
-router.delete('/quizes/:quizId(\\d+)',     sessionController.loginRequired, quizController.ownershipRequired, quizController.destroy);
+router.get('/quizes/new', 				   quizController.new);
+router.post('/quizes/create',              quizController.create);
+router.get('/quizes/:quizId(\\d+)/edit',   quizController.edit);
+router.put('/quizes/:quizId(\\d+)',        quizController.update);
+router.delete('/quizes/:quizId(\\d+)',     quizController.destroy);
 router.get('/quizes/author',   quizController.author);
 module.exports = router;
