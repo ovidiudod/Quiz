@@ -14,21 +14,23 @@ var app = express();
 
 // session auto-logout
 app.use(function (req, res, next) {
-    var session = req.session;
+   
     // 2 minutos
     var maxTimeSleep = 5000;
     var currentTime = new Date().getTime();
-    var currentInactivityTime = currentTime - session.lastTime;
 
-    if(req.session.user){
+    if(req.session && req.session.user){
+         var session = req.session;
+         var currentInactivityTime = currentTime - session.lastTime;
+
         if(currentInactivityTime > maxTimeSleep){
             delete req.session.user;
             res.redirect('/login');
         }
-    }else{
-        session.lastTime = currentTime;
+        else{
+             session.lastTime = currentTime;
+         }
     }
-
     next();
 });
 // view engine setup
