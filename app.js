@@ -12,17 +12,7 @@ var routes = require('./routes/index');
 
 var app = express();
 
-// session auto-logout
-app.use(function(req, res, next) {
-  if (req.session.user) {
-    if (Date.now() - req.session.user.ultima_peticion > 2000) {
-    delete req.session.user;
-    } else {
-    req.session.user.ultima_peticion = Date.now();
-    }
-  }
-next();
-});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,6 +50,17 @@ app.use(function(req, res, next) {
   next();
 });
 
+// session auto-logout
+app.use(function(req, res, next) {
+  if (req.session.user) {
+    if (Date.now() - req.session.user.ultima_peticion > 2000) {
+    delete req.session.user;
+    } else {
+    req.session.user.ultima_peticion = Date.now();
+    }
+  }
+next();
+});
 app.use('/', routes);
 
 // catch 404 and forward to error handler
