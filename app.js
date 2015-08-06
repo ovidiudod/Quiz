@@ -13,26 +13,17 @@ var routes = require('./routes/index');
 var app = express();
 
 // session auto-logout
-app.use(function (req, res, next) {
-   
-    // 2 minutos
-    var maxTimeSleep = 5000;
-    var currentTime = new Date().getTime();
-
-    if(req.session && req.session.user){
-         var session = req.session;
-         var currentInactivityTime = currentTime - session.lastTime;
-
-        if(currentInactivityTime > maxTimeSleep){
-            delete req.session.user;
-            res.redirect('/login');
-        }
-        else{
-             session.lastTime = currentTime;
-         }
+app.use(function(req, res, next) {
+  if (req.session.user) {
+    if (Date.now() - req.session.user.ultima_peticion > 2000) {
+    delete req.session.user;
+    } else {
+    req.session.user.ultima_peticion = Date.now();
     }
-    next();
+  }
+next();
 });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
